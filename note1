@@ -1,5 +1,6 @@
-22122017
-Command for LPIC-1
+22122017 Command for LPIC-1 
+
+
 
 uname - show what operating systems 
  -a show all
@@ -14,3 +15,67 @@ type - test command is it shell builtin or not
 #care with the shell builtin and external command
 (Exp: time and /usr/bin/time will show different output)
 
+#shortcut#
+C-f/Right arrow - move foward
+C-b/Left arrow - move backward
+C-p/Up arrow - previous command
+C-n/Down arrow - next command
+C-D - Delete character under cursor
+C-x-Backspace - clear all text to cursor
+C-K - clear from cursor to the end of the line
+C-T - transpose two letter
+C-R - search backward history command
+C-S - search foward history command
+C-A - move to beginning of line
+C-E - move to end of line
+Es-U - convert text from cursor to end of word to UPPERCASE
+Es-L - conver text from cursor to end of the word to lowercase
+Es-C - convert letter under cursor to uppercase
+
+
+!! set -o vi - change bash keybindings form EMACS to vim 
+
+
+history - show command history(history is stored in .bash_history)
+
+ !! - show last command and executed
+ !<number in history> - executed command form number in history
+ -c - clear history
+
+#~/.bashrc or /etc/profile is where shell configuration is stored
+ 
+env - view entire environment variablesi
+
+unset - unset variables 
+
+man - view man pages for commands
+ -k - find man from tags
+ <section number> - show man from section
+
+##man file section number
+1 --> executables Programs
+2 --> System calls from kernel
+3 --> Library calls by program libraries
+4 --> Device files(usually stored in /dev)
+5 --> File formats
+6 --> Games
+7 --> Miscellanous
+8 --> SysAdmin commands
+9 --> Kernel Routines
+
+
+info - new version of man ( can move from one section to others)
+
+REDIRECTION /STREAMS/PIPES
+
+STDOUT/STDIN/STDERR
+Operator
+
+>  - Creates file containing STDOUT . If exists overwrite
+>> - Append STDOUT to file. If file doesnt exists its created
+2> - Creates file containg STDERR . If exists overwrite
+2>> - Append STDERR to file. IF file doesnt exists its created.
+&> - Creates file containing STDOUT n STDERR,if exists overwrite
+< - Send the content of files to be used as STDIN
+<< - Accepts text on the following lines as STDIN( use in here doc)
+<> - specified files is use for STDIN and STDOUT
