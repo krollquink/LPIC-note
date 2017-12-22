@@ -1,0 +1,16 @@
+22122017
+Command for LPIC-1
+
+uname - show what operating systems 
+ -a show all
+
+time - show run time for a command
+
+set - set enviroment variables,
+
+exit/ logout - exit any shell/only login shells
+
+type - test command is it shell builtin or not
+#care with the shell builtin and external command
+(Exp: time and /usr/bin/time will show different output)
+
