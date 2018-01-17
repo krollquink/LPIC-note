@@ -1,0 +1,111 @@
+ Managing Files.
+
+Naming Files
+-Uppercase and Lowecase OK
+-.,-,_ is OK, backup file end with ~ 
+-Space can be insert in filename but need to escape with \
+-cant be used in filenames: * ? / \" --> can create but better avoid because can cause confusion
+-filename length depend on filesystem ext2fs,ext3fs,ext4fs,XFS,Btrfs ,etc--> limit 255 char
+-.xxxx can be extension
+-file started with . is hidden file
+
+-./ = current directory
+- ../ = parent directory
+-FILE IS CASE_SENSITIVE
+
+
+
+WILDCARD EXPANSION
+
+? - single character
+b?g = big,bog,bog
+* - matches any character
+b**k = book, biik 
+() = match and character in set or range
+
+b(ok)s = bos, bks
+b(a-z) = ba,bb,bc,bd....
+
+
+File Command
+
+ls = list file
+ -F Display file type
+ -l long list
+ -a all
+ --color show color listing
+ -d directory
+ -R recursive
+
+pwd = show current directory
+
+cp = copies file
+ -R recursive (usually use to copy directory)
+ -f force 
+ -i interactive mode(will askk comfirmation)
+ -a archive (preserve permission and link)
+ -u update if there any changes
+
+mv = move file (also use for replace)
+#mv in same filsystem is fast, in different filesystem is slow
+
+rm = remove files
+ -r/R recursive(use to remove directory)
+ -f force
+ -i interactive mode
+
+touch = change timestamp of files
+ -a change access time only
+ -m change modification time only
+ -c do not create file that already exist
+ -t set time specified
+
+
+
+ARCHIVING FILE
+
+tar = archive file
+ --create/c create archive
+ --concatenate/ A append tar file to archive
+ --append/r Appen non-tar to archive
+ --update/u append files that are newr than those in an archive
+ --diff/--compare/d compare archive to files in disk
+ --list/t list archive contents
+ --extract/x extract files from archive
+ z compress file using gzip/ugzip
+ j compress using bzip
+ v verbose
+ f file
+
+ussualy use
+tar xf [tar-file] = extract file
+tar czf = compress and archive file
+
+
+cpio = aarchive file (same with tar)
+
+-cpio has three operating mode
+-Copy-out mode = -o/--create creates an archive and copies files into it
+-Copy-in mode = -i/--extract  extract data from existing archive(extract only that file iff the name match the pattern)
+-Copy-Pass mode = -p/--pass-through cimbines copy-out and copy-in mode. Copy a directory tree from one location to another
+
+ -a reset the access time
+ -A Appends data to existing archive
+ -E filename use content of filename as alist of files to be extracted in copy-in
+ -F filename use filename as the cpio archive file; if this ommited cpio will use stdin or stdout
+ 
+
+exp=
+
+find ./test.txt
+
+compress or archive 
+find ./test.txt | cpio -o > ~/test.cpio
+find ./test.txt | cpio -o|gzip > ~/test.cpio.gz
+
+extract
+gunzip ~/test.cpio.gz
+cpio -i < ~/test.cpio
+
+gunzip -c ~/test.cpio.gz | cpio -i
+
