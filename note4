@@ -79,15 +79,16 @@ tar = archive file
 
 ussualy use
 tar xf [tar-file] = extract file
+tar xzf [tar-file] = extract compressed file and archive
 tar czf = compress and archive file
 
 
 cpio = aarchive file (same with tar)
 
 -cpio has three operating mode
--Copy-out mode = -o/--create creates an archive and copies files into it
--Copy-in mode = -i/--extract  extract data from existing archive(extract only that file iff the name match the pattern)
--Copy-Pass mode = -p/--pass-through cimbines copy-out and copy-in mode. Copy a directory tree from one location to another
+-Copy-out mode = -o/--create >>creates an archive and copies files into it
+-Copy-in mode = -i/--extract  >>extract data from existing archive(extract only that file iff the name match the pattern)
+-Copy-Pass mode = -p/--pass-through >>combines copy-out and copy-in mode. Copy a directory tree from one location to another
 
  -a reset the access time
  -A Appends data to existing archive
