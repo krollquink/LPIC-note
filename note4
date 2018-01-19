@@ -110,3 +110,157 @@ cpio -i < ~/test.cpio
 
 gunzip -c ~/test.cpio.gz | cpio -i
 
+
+dd = archive file at low level
+-can set partition as and output for the file(copy all to the partition)
+-backup entire partition(including empty space)
+-best to make an exact copy for partition
+
+dd if=/dev/sda3 of=/dev/dvd
+
+dd if=/dev/dvd of=/dev/sda3
+
+
+TRICK
+create empty file with particular size with dd===== by using /dev/zero
+
+dd if=/dev/zero of=empty-file.img bs=1024 count=720
+
+bs=<set block size> count=<set lengtH>
+
+BACKING UP OPTICAL 
+-need special backup
+
+cdrecord - 
+
+mkisofs -create ISo-9660 / UDF filesystem
+
+tar/cpio --> mkisofs --> cdrecord (preserve permission bit)
+
+
+MANAGING LINKS
+-shortcut like windows
+-give command multiple names
+-enable programs that look for the same files in deifferent locations to access the same files.
+
+--hard links 
+   --> produced by creating two directory entries that point to the same file/same inode
+   --> both file are equally valid, one is created after the another
+   --> must delete both file 
+   --> filesystem must support hard links
+   --> must exist in single lowlvl filesystem
+--soft links
+--soft link(symbolic links)
+   --> files is point to the linked-to file.
+   --> accesing link is like accessing the original file.
+   --> can go across other filesystem
+   --> more common than hard links
+
+
+ln = create link(create hard links by default)
+ -f force option
+ -i interactive comfirmation to change links
+ -d hard link for directories
+ -s/--symbolic create symbolic/soft links
+
+
+Directory Commands
+
+mkdir = create directory
+ -m set mode /permission
+ -p create parent
+
+rmdir = delete/destroy directory only empty directory
+
+ -p delete parent
+*better use rm -r to delete directory because rmdir only delete empty directory
+
+
+
+MANAGING FILE OWNERSHIP
+
+user/group/all
+
+chown (options) [newowner][:newgroup] filenames
+
+ -R/--recursive change ownership all directories trees
+*only root can use chown to change other user file. if not user can only change their files only!
+
+chgrp [options] newgroup filenames = change group for files
+
+ -R/--recursive 
+*chgrp is set of chown
+
+
+
+
+
+ - _____ r ___ w ___ x ___ r ___ - ____ x ___ r ___ - ___ x 
+ 1       2     3     4     5     6      7     8     9     10 
+
+1 = file type code
+
+2,3,4 = Owner permission
+
+5,6,7 = Group permission
+
+8,9,0 = World permission
+
+
+-rwxr-xr-x.  
+
+Special permission Bit
+
+SUID = run the file with permission of whoever owns the file
+-put s in the permission string(owner)
+
+SGID = set group ID , similar to SUID
+-put s in the permission string(group)
+
+
+Sticky bit = protect file from deleted by those who don't own the files.
+-indicated by t
+rwxr-xr-t.
+
+
+
+DAC,ACLs and SElinux
+new system called ACL
+setfacl
+getfacl
+
+Role-based access control(RBAC)
+SELinux
+
+chmod = change file mode
+
+exp 
+chmod 644 test.dat
+
+Sticky bit - 1
+SGID - 2
+SUID - 4
+
+
+chmod symbolic mode
+
+u Owner   + Add            r read
+g Group   - Remove         w write
+o Other   = Set equal to   x Execute
+a All
+                           X Execute only if the file is a directory or already has execute permission
+                           s SUID or SGID
+                           t Sticky bits
+
+                           u Existing owner
+                           g Existng  group
+                           o Existing other
+
+
+chmod g-w,o-rw test.txt
+chmod a+x test.txt
+chmod ug=rw test.txt
+chmod g=u
+
+ONLY ROOT AND OWNER CAN CHANGE FILE PERMISSION
+
