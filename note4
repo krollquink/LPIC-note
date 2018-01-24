@@ -264,3 +264,152 @@ chmod g=u
 
 ONLY ROOT AND OWNER CAN CHANGE FILE PERMISSION
 
+
+Setting the Default Mode and Group
+-file will follow user default ownership and permissions
+-default ownership and permission defines using user mask
+
+umask = takes as input an octal value that represents bits to be removed.
+
+exp 
+
+umask        created files   created directory
+umask 000 -->666             777
+
+
+ordinary user can change their own umask
+Super user can change for all user
+
+umask insinde /etc/profile (default settings)
+
+-S - produce umask symbolically
+
+umask -S
+
+u=req,g=rwx,o=rx
+
+can be used symbolically too
+exp 
+umask u=rwx,g=rx,o=rx
+
+newgrp = set default group for new file( user can use this)
+
+Changing file attributes
+
+chattr = change file attributes
+
+exp of attributes
+A = wont update access time
+a = sets append mode, disable write azccess
+c = kernel will compress data written to file and uncompress when read back
+i = make the file immutable,file cant be deleted,links cant be created and cant be renamed
+j = kernel will journal all data written to the file
+s = completely remove the inode data(kernel will zero the data block)
+t = disable tail merging(end of data blocks will be filled with other data) 
+
+
+exp
+chattr +i test.txt
+chattr -i text.txt
+
+
+Managing Disk Quotas
+to manage quotas created by user
+-almost all filesystem support quotas
+2.4.x kernel = use quota v1 support system
+2.6.x kernel and up = use quota v2 support system
+
+quota = tools for quota v2 support system
+-need to edit /etc/fstab to use quota
+-need to add usrquota in fstab
+
+--> /dev/sdc5 /home ext4 usrquota,grpquota 1 1
+
+and need to be enable in SysV or any other init tools
+exp
+chkconfig quota on
+quotaon
+
+then reboot is needed
+then quotacheck command
+
+quotacheck = check quota for the filesystem and builds current disk usage data records
+
+exp 
+quotacheck -cu /home
+
+after that set quota for user
+
+edquota = use text editor to set user quota
+
+exp 
+edquota sally
+
+-alter soft and hard limit for quota
+-hard limit will make kernel to stop the user from passing the limit
+-soft limit make user can temporarily exceed soft limits,have grace period if user exceed grace period it will treat the soft as hard.
+-can set grace period using -t
+edquota -t <time> = set on per-filesystem basis
+
+edquota -g = edit quota for group
+
+repquota -a = summarizez quota information about filesystem
+quota = same as repquota,and take options to show quota information 
+-g = show group
+-l = omits NFS mounts
+-q = limits outputs to filesystemon which usage is over limit
+
+Locating Files
+
+Linux FHS(FILE HIERARCHY SYSTEM)
+-from FSSTND
+- have shareable and non share-able file
+-static and variable files
+-static = program executeables
+-variable = automated scripts,servers etc
+FHS user this 2x2 matrix to isolate files
+
+	 | Shareable      | Unshareable
+_________|________________|____________
+	 |	          |
+Static	 |/usr /opt       | /etc /boot
+_________|________________|____________
+	 |	          |
+Variable |/home /var/mail | /var/run /var/lock
+_________|________________|____________
+
+Directory Contents
+
+/ = root directory( all directories branch from here)
+
+/boot = static and unshareable files,related to initial booting, contains grub and lilo conf file
+
+/etc = unsahreable and static, higher level configuration files,
+
+/bin = contain executables file,almost never share
+
+/sbin = contain executable file for sysadmin(fdisk,e2fsck etc)
+
+/lib = contain program libraries
+  /lib/modules = contains kernel modules
+
+/usr = host computer programs
+
+/usr/local = mirror the /usr, cdirectory that contains files that installs locally, exp is files that compiled locally.
+
+/usr/share/man = contain man pages used by man command
+/usr/share/local/man = local version
+
+/usr/X11R6 = contain file realted to X windows
+
+/opt = inted for ready made packages ,games,word precessors.
+
+/home = user home directory
+
+/root = home directory for root
+
+/var = contains log,mail ,new files and o on
+
+/tmp = temporary files,usually cleanup when booted
+
+/mnt
