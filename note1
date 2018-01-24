@@ -78,4 +78,5 @@ Operator
 &> - Creates file containing STDOUT n STDERR,if exists overwrite
 < - Send the content of files to be used as STDIN
 << - Accepts text on the following lines as STDIN( use in here doc)
+
 <> - specified files is use for STDIN and STDOUT

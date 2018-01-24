@@ -412,4 +412,58 @@ Directory Contents
 
 /tmp = temporary files,usually cleanup when booted
 
-/mnt
+/mnt = mounts removable-media devices,
+
+/media = linux treat hardware device like a file,so they put it here
+
+/proc = created dynamically,
+
+
+
+/boot
+/home
+/opt
+/tmp           Ok in different partition
+/usr
+/usr/local
+/var
+
+
+
+/bin
+/dev
+/etc          Better in same partition
+/lib
+/sbin
+
+
+Locating Files
+
+
+find = brute force approach to find a file
+
+find [path] [expression]
+
+-name = find by patter name
+-perm = find by permission
+-size = find by size,can be use with letter code such as c for bytes or k for kilobytes
+-gid = search file in group ID
+-uid  = search file in user ID
+-maxdepth  = search by depth of directory
+
+exp 
+find / -name *.txt
+
+locate = search from database
+slocate = security features of locate
+
+whereis = show binary file directories, library directories, man page
+
+whereis ls
+
+which = just find path to the first match it finds	
+
+type = tell what type the command is
+
+
+
