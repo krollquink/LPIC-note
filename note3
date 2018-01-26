@@ -1,0 +1,50 @@
+Chapter 3 Configuring Hardware
+
+-All OS run on hardware
+.
+.
+.
+Configuring Firmware
+
+-Well known firmware ,BIOS(Basic IN/OUT System)
+-new frimware EFI/UEFI(Unified extensible Firmware interface)
+
+-Firmware reside in EEPROM(electronically Erasable programable Read Only Memory)
+
+firmware work flow
+-->Turn on--> POST -->load bootloader --> past control to boot loader.
+
+IRQ(Interrupt Request) = Signal send to the CPU instructing it to suspend its current activity and to handle some external event.
+
+-in x86_64 IRQ is from 0 to 15
+-modern PC provide more!
+-Some IRQ already reserverd for specific purpose
+
+0 - System Timer
+1 - Keyboard
+2 - Cascade for IRQs 8-15
+3 - Second RS-232 serial port
+4 - First RS-232 serial port
+5 - Sound card or second parallel port 
+6 - Floppy disk controller
+7 - First parallel port
+8 - Real time clock 
+9 - ACPI system control interrupt (used by intel chipset for Power Management)
+10 - Open intterupt
+11 - Open intterupt
+12 - PS/2 mouse
+13 - Math coprocessor (Reserved for internal use)
+14 - Primary ATA controller (/dev/hda /dev/hdb)
+15 - Secondary ATA controller(/dev/hdc /dev/hdd)
+* new system for Serial ATA (/dev/sda /dev/sdb)
+
+cat /proc/interrupts = to see list of interrupts
+
+I/O Addresses(I/O ports) = unique locations in memory that are reserved for communications between CPU and specific physical hardware(like IRQ ,cannot be shared)
+
+cat /proc/ioports
+
+DMA(direct memory addressing) -Hardware directly access memory without CPU
+
+cat /proc/dma
+
