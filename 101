@@ -1,0 +1,66 @@
+lscpu
+ lsblk = show our system block information
+-t = show tree
+-f = show the filesystem,uuid,type ,where is it mount
+-i = show in ASCII character
+
+lspci = list all pci ID and information
+show port and slot
+-v = verbose
+-m = space limited,can be parsed
+-vmm = show verbose and can be parse(easy to read)
+-t = listing in tree can be combined with -v
+
+lsscsi = show scsi information
+-d
+-g =
+-s = show size
+-v = verbose
+-l = level of running
+
+
+lsusb =how usb information
+
+-v = verbose
+-s =show specific bus and dev number
+-d = use device number to specific 
+-t = show in tree format
+
+lsraid = show raid information
+
+lsdev = show infromation of all devices connected to our system
+
+
+
+
+ALL OF THE INFORMATIONO ARE TAKEN FROM /DEV AND /PROC THAT ARE TIED TOGETHER
+
+
+What is sysvinit
+=package that contain group of processes that control basic system function of the system
+
+=include 'init' app ,which boot very first in after kernet started
+
+=control startup.runnin and shutdown of other program.
+
+init always PID 1
+
+Boot Process
+-->Turn on --> BIOS/EFI-->scan and pass to primary boot sector(can be choosed) -->MBR(first 512 bytes) can be ,anything-->boot loader executed, GRUB,GRUB2,LILO-->boot loader boot kernel --> kernel boot initrd /module -->root fs is mounted --> init load (/sbin/init) -->/etc/inittab is read and script is run --> module inside init is loaded -->check root fs -->network dev started --> remote fs mounted -->init rescans /etc/inittab and set the sytem to default runlevel and complete the execution in numeric order--> tty is loaded -->then system login prompt displaayed.
+
+
+init will set runlevel
+
+RUNLEVEL
+0 - halt (SHUTDOWN)
+1 - single user 
+2 - multi-user(no remote /fs)
+3 Full Multi-User (remote fs)
+4 - Unused
+5 -X11 with GDE
+6 - Reboot
+
+Boot the system(sysV and RC scripts - sysvinit)
+
+telinit
+init
