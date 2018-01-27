@@ -48,3 +48,72 @@ DMA(direct memory addressing) -Hardware directly access memory without CPU
 
 cat /proc/dma
 
+
+Coldplug and hotplug
+
+coldplug = system need to be off for plug in
+hotplug = system can be on for plug in
+
+Some tools to help user to access information and edit hardware.
+
+1.Sysfs = mounted at /sys ,exports information about devices so that user-space can access
+2. HAL-Daemon = Hardware Abstaraction Layer (hald) ,run as daemon, provides other user-space programs with information about available hardware.
+3. D-Bus = Desktop Bus , run in daemon, enable proccess to commucincate with hardware, such as USB
+4. /udev = mounted at /deb which creates dynamic device files as drivers are loaded and unloaded. can configure udev in /etc/udev
+
+Configuring Expansion Cards
+
+lspci = displays all of the information about the PCI busses in system.
+-v = increase verbosity
+-n = display information in numeric codes rather than translating the codes to manufacturer and device names.
+-nn Displays both the manufacturer and device names and their associated numeric codes.
+-s = show specific pci
+
+
+Kernel Modules
+
+-handle hardware in linux
+-stored in /etc/modules
+-some modules already compiled into kernel
+
+lsmod = show modules that currently loaded into the system
+
+Loading Kernel modules
+
+insmod / modprobe
+
+insmod = insert module into the kernel
+	 need to load dependencies
+
+modprobe = automatically loads any depended-on modules
+
+insmod
+exp 
+insmod /lib/modules/3.16.6/kernel/drivers/bluetooth/bluetooth.ko
+-require full name module
+-sometimes need module options, need to refer to the documentation
+
+
+modprobe 
+exp 
+modprobe bluetooth
+
+-v = verbose
+-C = use configuration file in /etc/modprobe.conf
+-n/--dry-run = causes modprobe to perform checls and all other opertaions except module insertion.
+-r = remove module
+-f = froce the module loading even if the kernel version doesn't match what the module expect.
+--show-dependencies = show dependecies for the module
+-l = list option available form the wildcards
+
+Removing Kernel Module
+
+rmmod = removing module
+
+rmmod bluetooth
+-v = verbose
+-f = force removal
+-w = wait for the module in unused condititon before removing it
+
+Configuring USB devices
+
