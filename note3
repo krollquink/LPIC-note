@@ -117,3 +117,39 @@ rmmod bluetooth
 
 Configuring USB devices
 
+-There are several USB controllert available 
+-UHCI,OHCI,EHCI,R8A66597
+-UHCI and OHCI = USB 1.0
+
+two tools for managing USB devices:usbmgr and hotplug
+
+usbmgr = detect usb and load module to the kernel
+-but hotplug is famous
+
+hotplug = relies on kernel support , uses files stored in/etc/hotplugto control specific USB,
+
+COnfiguring Hard Disk
+
+-Three Common hardisk interface
+ Parallel Advanced Technology Attachment(PATA),ATA
+ Serial Advanced Technology Attachment(SATA)
+ Small Computer System Interface (SCSI)
+
+++USB,IEE1394
+
+PATA
+-parallel interface,several bits is stransferred over the cable at once.
+-cable are wide 
+-supporting to 40 to 80 lines
+-can connect up to two devices to each PATA connector,
+-must be configured as MASTER and SLAVE(done via jumper)
+-modern PATA support cable select
+-/dev/hda /dev/hdb
+-hda for master and hdb for slave
+-partition hda1,hda2
+-modern distibution treat PATA disks as SCSI
+
+SATA
+-FASTER than PATA
+-cable much thinner
+
