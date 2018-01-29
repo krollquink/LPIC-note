@@ -220,3 +220,254 @@ Alternative to PARTITION
 
 Mount Points
 -After partition is created, it must be mount before use
+
+
+Creating Partitions and Filesystems
+
+MBR partitioning tools!
+
+fdisk = fixed disk,to create partition for MBR
+
+exp fdisk /dev/hda
+
+p = display current partition = fdisk -l /dev/hda
+n = create new partition
+w = write table to disk and exit
+q = quit without saving
+
+After partition is created , it needs to be formatted!
+-involve in low level data structures in disk
+
+
+Linux Supported FileSystem
+1. Ext2fs(Second Extended File System)
+- tradiotanl Linux-native fs
+-created for linux. and dominant 
+-good choice for small /boot partition.
+-non journal fs
+-ext2
+
+2. Ext3fs 
+-basically ext2fs with journaling
+-recover from crash quickly
+
+3. Ext4fs 
+-abily to work with very large disks
+
+4. ReiserFS
+- designed from scratch as journaling FS for Linux
+-good at hadling large numbers of small files
+-because sue tricks to squeeze the ends of files into each other's unused spaces
+-reiserfs
+
+5. Jfs 
+- IBM developed JFS
+-techincally sophisticated journaling system
+-good if familiar wih AIX or OS/2 
+-jfs
+
+6. XFS
+SGI created XFS for IRIX OS
+-gain reputation for robustness,speed and flexibility on IRIX
+
+7. Btrfs
+-fast performer and can handle large disk and files
+-maybe a successor for current fs
+
+Different FS for Linux
+
+1. FAT(File Allocation Table)
+-old and primitive 
+-the only fs supported by DOS during early day of Windows,
+-all majos OS support FAT
+-vary in the size of FAT(12-, 16-, 32-bit pointers)
+-support long filenames
+-msdos
+
+2. NTFS(New Technology FS)
+- preferred fs for Windows NT and beyond.
+-linux can reand and overwrite existing files, but cannot write new files
+
+3. HFS and HFS +
+-Hierarchical FS
+-for MAc OS
+-Linux provides full read/write HFS 
+
+4. ISO9660
+-standard fs for CD-ROM
+-come with several level
+-Level 1 - similar to the original FAT
+-Level 2 and 3 - add support for longer 32-character filenames
+-Linux also support Rock Ridge extension for longer filenames,permissions,symbolic links, and so on.
+-same with Juliet for Windows
+-Windows support for both of them
+
+5. UDF (Universal Disc Format)
+-next generation fs
+-use in DVD-ROM
+
+
+PS = to create ISO-9660 and other optical disc fs 
+- mkisofs = creates ISO-9660
+-cdrecord = to writes this image to a blank CD-R
+-growisofs = combine both but only works onn recordable DVD media
+
+Creating FS
+
+mkfs.fstype = create fs for the partition
+fstype = fs type code
+
+or mkfs -t <fs type code>
+
+*for ext2 n ext3 mke2fs is used instead
+
+-c = bad block Check(sign that the disk doesn't have long to live)
+-m = percent, sets the reserved-space percentage
+
+other mkfs
+mkdosfs = create FAT fs
+mkfs,msdks
+mkfs.vfat
+
+-F = set fat-size
+
+Creating Swap Space
+-Linux use swap partition
+-extension of memory
+-MBR code 0x82 
+-need to defined in /etc/fstab 
+
+mkswap = to create swap fs
+exp 
+mkswap /dev/sda7
+
+swapon /dev/sda7 = use the swap space
+to activate it permanenly need to change /etc/fstab
+
+Maintaining FS
+
+-basically tools use to maintain FS need to be used when the fs is unmounted
+
+3 basic tools
+1.dumpe2fs
+2.tune2fs
+3.debugfs
+
+dumpe2fs = show information about ext2 and ext3
+
+-h = utility will omit information about group descriptors
+-can be run while the fs is mounted
+
+xfs provide same utilites = xfs_info
+
+Tune FS
+
+tune2fs = change fs parameters that are reported by dumpe2fs
+-c = maximum number of time the disk may be mounted without a check 
+-C = set mount counter
+-i = set interval for check
+-j = add journal to the fs, convert ext2 to ext3
+-m = set reserved block
+
+xfs_admin = for xfs
+-PLEASE USE IN UNMOUNTED FS
+-l/-u = to obtain fs UUID
+
+blkid = can display the label and UUID of any partitions
+
+-L/-U = change the label(12 char only) and UUID (use generate to create UUID/dont set UUID that been used by other partitions)
+
+
+Interactive Debugging FS
+
+debugfs = use interactive options to debug fs
+
+-show_super_stats/stats = same as dumpe2fs
+-stat filename = display inode of the file
+-undelete inode name = undelte file 
+	- need to know the file inode using lsdel/list_deleted_inodes
+-write internal-fiels external-file = extract file from badly damged file
+-cd ,mv,cp etc
+-list_requests ,lr,help ? = show help
+-quit	
+
+Checking FileSystem
+
+fsck = checkin FS
+
+-A = check all files in /etc/fstab
+-V = verbose 
+-N = will display what its normally do without doing it
+-t = set fs type
+-- = for inside options
+	-f = force
+	=i = interactive 
+	-a/-p = perform automatic check
+!!ONLY RUN FSCK IN UNMOUNTED FS or READ ONLY FS
+
+Monitorin DISK use by Partition
+
+df = summary fo disk space used 
+-a = all fs
+-h = human readable
+-i /--inodes = show inodes
+-l = local only
+-T = show filesystem type
+-t =limit the filesystem type to show
+
+exp 
+df /home = can be used to see disk usage of /home
+
+MOnitoring DISK use by Directory
+
+du = show disk usage by Directory/similar to du
+-a = show disk usage for individual files as well
+-c = compute grand total
+-h = human readable
+-l = count hard links
+--max-depth = limit the report to n levels
+-s = summarize
+-x = limit filesystem 
+
+MOunting and Unmounting
+
+mount= mounting file system
+
+-a = mount all fs in /etc/fstab
+
+-r = mount it to read only
+-v = show ver bose
+-w = mount it to read write
+-t = mount with file type
+-L/-U = mount by label or UUID
+-o = add filesystem specific options
+
+--file that mounted is saved in /etc/mtab, this file in /etc but cannot be configure
+
+mount options
+
+loop = loopback fS
+auto or noauto = mount or doest mount the fs at boot
+user or nouser = allows or disallows ordinary users to mount the fs,Used in /etc/fstab
+users = any user may unmount the fs
+owner - similar to user but user must own the device
+remount = change one or more mount options without explicitly unmounting a partition
+ro = specifies a read-only mount of fs
+rw = specifies a read write
+.
+.
+.
+
+
+
+umount = unmount fs
+
+basicallyy same options with mount
+
+Permanently Mount FS
+
+EDIT /etc/fstab
+
+DEVICE 	MOUNTPOINT  FILESYSTEM OPTIONS DUMP FSCK
+-DEVICE usually use label /UUID
+
