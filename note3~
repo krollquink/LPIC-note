@@ -153,3 +153,66 @@ SATA
 -FASTER than PATA
 -cable much thinner
 
+Configuring SCSI
+-better than PATA
+-few people use SCSI
+-SCSI support 8-16
+-sometimes SCSI adapter have their own firmware
+-numbering is depend on SCSI ID
+-lowest to highest
+
+Design Hard Disk Layout
+-create partition and format!
+-Why partiton
+--Multiple OS support
+--Filesystem choice
+--Disk Space management
+--Disk Error protection
+--Security
+--Backup
+
+
+Partitioning Systems
+-Usually MBR
+---data stored in the first sector of the disks
+---size is very limited (2tebibytes)=2^40 bytes=512Byte
+-the successor is GUID Partition Table
+
+
+MBR partition
+x64 system only allowed 4 partition
+-but hard disk become bigger and make this new partition scheme
+-PRimary
+ -same as the original partition
+-Extended
+ -special type of primary partition that serve as placeholder for the next type
+-Logical
+ -reside within an extended partition
+
+primary partition = 1-->4
+logical partition = 5-->up
+gap cannot exist in logical partition
+
+MBR HOLD partition table and boot loader
+-very sensitive and important
+-have type code
+--0x0c = FAT,0x05= old type extended partition 0x07 = NTFS ,0x82 = Linux swap, 0x83 = filesystem
+
+GPT 
+part of intel EFI spec
+-can be use in PC that doesnt use EFI
+-preferred in partitioning system on disks bigger than 2Tib
+-employs protective MBR
+-make utilities unaware of GPT
+-additional data structures define GPT
+-this data sturctures lies in start of disk and end of disk
+
+--CAN create up to 128 partitions(may be raise if necessary)
+--gap can occur in partition number 
+-drawbacks is support for it is immature
+
+Alternative to PARTITION
+-LVM(logical volume management)
+-use pvreate,vgcreate,lvcreate,lvscan to manage physical volumes(partition)
+-combine partition into one big volume group
+-assign them into /dev/mapper

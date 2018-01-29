@@ -195,3 +195,28 @@ gap cannot exist in logical partition
 
 MBR HOLD partition table and boot loader
 -very sensitive and important
+-have type code
+--0x0c = FAT,0x05= old type extended partition 0x07 = NTFS ,0x82 = Linux swap, 0x83 = filesystem
+
+GPT 
+part of intel EFI spec
+-can be use in PC that doesnt use EFI
+-preferred in partitioning system on disks bigger than 2Tib
+-employs protective MBR
+-make utilities unaware of GPT
+-additional data structures define GPT
+-this data sturctures lies in start of disk and end of disk
+
+--CAN create up to 128 partitions(may be raise if necessary)
+--gap can occur in partition number 
+-drawbacks is support for it is immature
+
+Alternative to PARTITION
+-LVM(logical volume management)
+-use pvreate,vgcreate,lvcreate,lvscan to manage physical volumes(partition)
+-combine partition into one big volume group
+-assign them into /dev/mapper
+-filsesystem size can be change!!
+
+Mount Points
+-After partition is created, it must be mount before use
