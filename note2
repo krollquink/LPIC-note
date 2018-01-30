@@ -1,0 +1,41 @@
+Managing Software
+
+Package Concepts
+-Linux package managemnet tools are intended to help build and modify this programs based on:
+1. Package = contain information about software packages, 
+	-usually distributed as single files
+	-once installed in consist of dozens or hundreds of files
+	-incluse additional information for package management systems
+2. Installed File Database = include all information about every file installed via package system,
+
+3. Dependencies = requirements of package for one another
+
+4. Checksums - used to verify the validity of the installed software
+
+5. Upgrades and Uninstallation = package management systems will track upgrades and uninstall
+
+6. Binary package Creation = got tools to create package form source code. 
+
+
+USING RPM!!
+
+-Red hat package management 
+-been used by many linux Distro
+RPM PACKAGE = packagename-a.b.c-x.arch.rpm
+
+Above contain
+-Package name
+-Version Number
+-Build number
+-Architecture
+
+In Ideal world RPM will install and run on any RPM distro that uses an appropriate CPU type.BUT!!!
+-distro may be use other version of RPM
+-RPM designed for other distro maybe using a different library
+-distro maybe named the package differently
+-sometimes package contain slightly different file
+-some programs contain disto-specific file or script/configuration
+
+IT safe to use YUM(Yellow Dog Updater) to install rpm package!
+
+
