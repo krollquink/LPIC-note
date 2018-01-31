@@ -38,4 +38,204 @@ In Ideal world RPM will install and run on any RPM distro that uses an appropria
 
 IT safe to use YUM(Yellow Dog Updater) to install rpm package!
 
+rpm = red hat package manager
+-i =install
+-U = Upgrade
+-e = uninstall
+q = query
+-V = verify
+-f = freshen
+--rebuild = build binary package
+--rebuilddb = rebuild rpm database to fix errors
+++++++++
+--force = force installation
+-h = show progression
+-v = perform uniform hash
+--nodeps = no dependency checks
+--test = check dependency conflicts.and other problems
+-a = veifies all ackages
+.
+.
+.
+
+yum = rpm meta-packager ( make life more easy)
+=install
+=update
+=check-update
+=upgrade
+=remove
+=list
+=search
+=provides
+=info
+=clean
+=shell
+=resolvedep
+=localinstall
+=localupdate=deplist
+
+yum configuration FIles
+/etc/yum.conf
+repos
+/etc/yum.repos.d
+
+Using Debian Packages
+
+dpkg
+-i = install
+--configure = configure installed package
+-r = remove packages but leave conf
+-P / --purge = remove package including ,conf files
+--get-selections =display currently installed package
+-p = Display indoramtion about and installed package
+-T = display information about an uninstalled package
+-l = list installed package with pattern
+-L = list the installed files associated with a package
+-S = locates the packages that own the files
+-C search for partially installed packages and suggests what to do with them
+
+apt-cache = database program 
+apt-cache showpkg = display information about package
+apt-cache stats = learn how many packages you've installed,
+apt-cach unmet = show missing libraries or files
+apt-cache depends = shows all of the specified packages dependencies.
+apt-cache pkgnames = displays the names of all the packages installed on the system.
+
+apt-get =meta-packaging tools for Debian
+
+=update
+=upgrade
+=dselect-upgrade
+=dist-upgrade
+=install
+=remove
+=source
+=check
+=clean
+=autoclean
++++++++
+-d = download only
+-f = fix a system on which dependencies is not statisfied
+-m = ignore missing
+-q = quiet omit progress indicator
+-s = simulate 
+-y = produce yes for all prompt
+-b = compile source package
+--no-upgrade = not upgrade if the olader version is already installed
+
+
+dslect,aptitude, Sypnatic = interactive text-based meta-packager
+dpkg-reconfigure = use to reconfigure package(postfix etc.)
+
+Debian package contain extra files for signature!
+
+cfg file
+/etc/dpkg/dpkg.cfg
+source list
+/etc/apt/sources.list
+
+
+Converting between Package Formats
+!
+Use alien
+
+alien = use to change oackage file to other format
+
+--to-deb
+--to-rpm
+--to-slp
+--to-tgz
+
+rpmbuild = to rebuild an RPM source to package
+
+
+
+ldd = check which libraries the programs files uses.
+
+ldconfig = update library cache
+-v = verbose
+-N = dont rebuild cache, just update link
+-x = opposite of -N rebuild cache not updating links
+-f = change library default path
+-C = change cache file
+-r = treat dir as a root
+-p = cause ldconfig to display the  current cache
+
+uname =show kernel information
+-i = hardware
+-s = kernel
+-v = version
+-r = release
+-p = processor
+-o = operating system
+-n = node
+-m = machine
+
+ps = show process information
+a= show all
+u= show user process
+e/A = show all system processes
+x= display all process for user who give command
+--forest = show process in linked
+
+top = Dynamic variant of ps
+-delay = specifes delay between update
+-p = monitor specific processies
+-n = tek number of updates
+-b = batch mode ,
+
+keymode
+k = kill process
+q = quite from top
+r = change process prioritu
+s = change display update rate
+P = sets the display to sort by CPU ussage
+M = sets the display to sort by Memory usage
+
+jobs = display minimal information about the processes associated with the current sessions
+
+pgrep = find PID easy!
+-u = specifies user 
+
+fg = bring app to foreground
+Ctrl +Z = bring to back
+bg = runngin in the background
+
+Manage proccess Priorites
+
+nice = change program priorities
+- = use minus
+-n = chnage the priorities
+--adjustment = change the priorities
+!use 10 as default
+-20 ~ 19 is posibble value
+default priorities is 0
+
+renice = change process priorites and need pid
+
+exp 
+renice 7 16580 -u pdavison tbaker
+
+
+Killing Processes
+- to kill process we send signal
+
+
+kill = kill processes by specifing signal and pid
+
+-s =signal
+
+SIGKILL=9 cause the process ot exit without performing routine shutdown tasks
+SIGHUP==1 terminate interactive programs and cause many daemons to reread their configuration files
+SIGTERM=15 causes the process to exit but allows it to close open files and so on
+
+-if you not specifiying signal default is 15=SIGTERM
+
+*nohup = make the program to ignore SIGHUP
+
+killall = kill a process bsed on its name rather thatn its PID
+
+-i = interactive
+
+pkill = allow you to kill one or more processes based on usernames,user id or group ID
 
