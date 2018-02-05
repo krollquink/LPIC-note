@@ -1,0 +1,72 @@
+Configuring The X Window System,Localization and Printing
+
+Configuring Basic X Features
+
+Basic X specifies features such as mouse used, keyboard layout,screen resolution,video refresh rate ,color depth and video card installed.
+
+-Some of this need us to tell X what are we using
+
+X Server Options for Linux
+
+1. XFree86 = 
+    -dominant till 2004
+    -open source server 
+    -support varieties of video card
+    -most software designed based on this
+    -significant changed from 3.x to 4.x
+
+2. X.org-X11 = 
+    - many change to this after XFree license change
+    - most of it is identical to Xfree
+
+3. Accelerated-X = 
+    -Commercial version of X
+
+
+Basically just stick to Distro provides
+
+Method of Configuring X
+
+X Configuration Utilites(use utility tools)
+-we can use utility tools to setting X
+
+1. X server itself
+-include capacity to query the hardware and produce a configuration file.
+
+Comm
+--> XFree86 -configure
+--> Xorg -configure
+
+*not producing good result ,but good for minimal modifications
+
+2. Distro specific tools
+
+Comm
+-->system-config-display = accessible from default desktop menu
+
+3. xf86cfg xorgcfg = utility(this tools is deprecated)
+
+
+X Configuration file format.
+
+X.org-X11 = called xorg.conf
+-stored in /etc/X11 
+
+XFree86 4.x = called XF86Config
+-stored in /etc/X11 
+-same conf as X.org
+
+XFree86 3.x = called XF86Config 
+-stored in /etc/X11 
+-same as XFree86 3.x but slightly different
+
+all conf file break the section to big section and each sechtion consisting the keywoed "Section"  and end with "EndSection:"
+
+example 
+Section "Input Device"
+    Identifier "Keyboard0"
+    Driver     "kbd"
+    Option     "XkbModel" "pc105"
+    Option     "XkbLayout" "us"
+    Option     "AutoRepeat" "500 200"
+EndSection
