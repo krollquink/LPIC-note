@@ -70,3 +70,13 @@ Section "Input Device"
     Option     "XkbLayout" "us"
     Option     "AutoRepeat" "500 200"
 EndSection
+
+If our Xorg have problem, modify configuration and test it.
+-best way to test is to reboot the pc
+-or change the system into a mode in which X is not started automatically( use telinit 3)
+-Some distribution need to close the GUI login server depending on config
+--->text-based login --> configure Xorg conf --> startx(use telinit 5 | /etc/init.d/xdm start for Debian and other distro that didnt use runlevels to start GUI)
+
+-van use ps ax | grep X to kill X inside X-enabled runlevel
+
+
