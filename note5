@@ -64,9 +64,9 @@ all conf file break the section to big section and each sechtion consisting the 
 
 example 
 Section "Input Device"
-    Identifier "Keyboard0"
-    Driver     "kbd"
-    Option     "XkbModel" "pc105"
+    Identifier "Keyboard0" <-- provides a label that will be used by other section
+    Driver     "kbd" <-- Tells X what driver to use to access the keyboard
+    Option     "XkbModel" "pc105" <-- set additional option for X
     Option     "XkbLayout" "us"
     Option     "AutoRepeat" "500 200"
 EndSection
@@ -77,6 +77,11 @@ If our Xorg have problem, modify configuration and test it.
 -Some distribution need to close the GUI login server depending on config
 --->text-based login --> configure Xorg conf --> startx(use telinit 5 | /etc/init.d/xdm start for Debian and other distro that didnt use runlevels to start GUI)
 
--van use ps ax | grep X to kill X inside X-enabled runlevel
+-can use ps ax | grep X to kill X inside X-enabled runlevel
+
+X Configuration Options
+
+-Module, InputDevice,Monitor,Device,Screen, ServerLayout
+-InputDevice likely to have to section for mouse and keyboard
 
 
