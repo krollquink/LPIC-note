@@ -84,4 +84,83 @@ X Configuration Options
 -Module, InputDevice,Monitor,Device,Screen, ServerLayout
 -InputDevice likely to have to section for mouse and keyboard
 
+Configuring X Fonts
+
+-configure X's core font can be set up at X conf file
+-you can configure a font server
+
+Font Technologies and Format
+
+1.  Bitmap Fonts 
+-represent fonts like bitmap graphics
+-where individual pixels in an array are either active or inactive
+-need multiple files to display font at mutiple sizes and different displays
+
+2. Outline Fonts (Scalable fonts)
+-Modern type of file, all formats represents eahc character as a series of lines and curves in a high-resolution matrix.
+-can scale in any size and display
+-take CPU time
+
+example: Adobe PostScript Type 1, Apple's TrueType
+
+X11 support both font
+
+
+Configuring X Core Fonts
+
+-X core fonts is fonts that are handled directly by X.
+need to:
+1.prepare font directory
+    -X11  save in /usr/share/fonts or /usr share/X11/fonts
+    -Type 1 fonts , named with .pfa or .pfb
+    - TrueType come as .ttf
+2.Add font directory to X's font path
+    -prepare summary files for that describes the fonts.
+    -called fonts.dir
+    -can be created automaticallyusing
+    #mkfontscale - reads all the fonts in the current directory and creates a fonts.scale same like fonts.dir but only descrives outline fonts.
+    #mkfontdir combines the fonts.scale with the fonts.dir,creatting if it doesn't already exist
+
+
+ttmkfdir - create fonts.dir for TrueType
+tpe1inst - create fonts.dir for Type 1
+
+Configuring Font Server
+
+-set font server for Linux
+-not a practice anymore
+-to use font server, X must list that server in its font path:
+example:
+
+Section "Files"
+    FontPath "unix:/7100"
+    Fontpath "tcp/fount.pangaea/edu:7100" <-- specifies font server 
+EndSection
+
+font server is confifure using catalogue in /etc/X11/fs/configo
+example
+
+catalogue = /usr/share/fonts/100dpi:unscaled,
+            /usr/share/fonts/Type1,
+            /usr/share/fonts/TrueType,
+
+restart X after change settings
+
+
+Why X core font suck
+-not easy to integrate screen display and printed output, awkward to use in application
+-theyre server-based, some application may not able to access the font files
+-provide limited or no support for kerning and other advanced typographic features
+-the dont support font smoothing
+
+SO they change to new system
+
+Xft FONTS!!
+
+
+
+
+
+
+
 
