@@ -157,10 +157,82 @@ SO they change to new system
 
 Xft FONTS!!
 
+Xft fonts solve problem X core font have
+
+fc-cache - causes X to run through all dir and create index files
+
+Configuring Localization and Internationalization
+
+Settings up time zone
+
+change /etc/localtime to time from /usr/share/zoneinfo
+change /etc/timezone to time from /usr/share/zoneinfo -- Debian
+change /etc/sysconfig/clock to time from /usr/share/zoneinfo -- Fedora
+
+-can use cp or ln -s 
+
+change individual time zone
+
+TZ = variable for time zone in any of 3 formats
+    -:filename 
+    -std offset - example EST +5
+    -daylight saving time in effect :std offset dst[offset]
+
+
+Settings up Locale
+-settings up computer's language,country and realted information for purpose of customizing displays
+
+locale format : 
+[language[_territory][.codeset][@modifier]]
+
+language = jp,en,fr
+territory = US,FR,JP
+.codeset = ASCII,UTF-8
+modifier = locale-specific code
+
+Where is Locale file
+
+in /usr/bin/locale or jsut run locale command
+
+locale -a = show all locale that available to you
+
+Changing Locale :
+
+change locale by changing variable
+exp:
+export LANG=en_GB.UTF-8 -- change only for the session
+to permanently change is to edit ~/.bashrc or /etc/profile
+
+
+Modifying Text-File Locales
+-change file encoding 
+
+iconv -f encoding [ -t encoding] [inputfile] ..
+
+exp 
+iconv -f iso-8859 -t UTF-8 umlautfile.txt > umlautfile-utf8.txt
 
 
 
 
+Linux Printing Architecture
+
+-Linux printing is built around Print queue
+-use lpr to print
+-queue is correspond to directory on the hard disk, in /var/spool/cups
+-CUPS is daemon run in background
+-CUPS can act as sand client passing print jobs to other PC in network
+-Application can query CUPS for printer information
 
 
 
+Understanding PostScript/Ghostscript
+
+Postscript = printer language for Linux (from Unix era)
+-not designed for Windows
+-linux generate PostScript and sent the results to printer queue
+-some programs can produce PostScript or Printer Control Language(PCL)
+-the problem is that it uncommon  and need Ghostscript to translate to fit that translator!! This is where we need Ghostscript
+
+Ghostscript = PostScript interpreter that change PostScript to output any of dozens of different printer format
+-the problem is Ghostscript produce a large output of files.
